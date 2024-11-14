@@ -1,6 +1,6 @@
 # Theme Settings
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "default" # options: air, aqua, contrast, dark, dirt, neon, mint, plum, sunrise
+minimal_mistakes_skin: "air" # options: air, aqua, contrast, dark, dirt, neon, mint, plum, sunrise
 
 # Site Settings
 title: "Adaptique"
@@ -8,7 +8,7 @@ subtitle: # site tagline that appears below site title
 name: "Adaptique"
 description: "Your site description."
 url: "https://code.adaptique.io"
-baseurl: "https://code.adaptique.io"
+baseurl: ""
 
 # Site Author
 author:
