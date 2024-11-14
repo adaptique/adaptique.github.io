@@ -1,16 +1,25 @@
 main:
-  - title: "Quick-Start Guide"
-    url: /docs/quick-start-guide/
-  - title: "Posts"
-    url: /year-archive/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
-  - title: "Pages"
-    url: /page-archive/
-  - title: "Collections"
-    url: /collection-archive/
-  - title: "External Link"
-    url: https://google.com
-    target: _blank
+  - title: "Overview"
+    url: /overview/
+  - title: "Architecture"
+    url: /architecture/
+  - title: "Technology"
+    children:
+      - title: "DNA Structure"
+        url: /tech/dna-structure/
+      - title: "Helical Chains (strands)"
+        url: /tech/helical-chains/
+      - title: "Base Pairs (links)"
+        url: /tech/base-pairs/
+      - title: "Security Model"
+        url: /tech/security/
+  - title: "Documentation"
+    url: /docs/
+  - title: "Use Cases"
+    url: /use-cases/
+  - title: "Developer Hub"
+    url: /developers/
+  - title: "Blog"
+    url: /blog/
+  - title: "Community"
+    url: /community/
