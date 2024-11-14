@@ -2,6 +2,8 @@
 title: "Overview"
 permalink: /overview/
 toc: true
+classes: wide
+layout: single
 ---
 
 ## What is Adaptique?
