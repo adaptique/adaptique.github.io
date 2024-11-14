@@ -5,7 +5,16 @@
     mermaid.initialize({
       startOnLoad: true,
       theme: "default",
-      securityLevel: "loose",
+      securityLevel: "loose"
+    });
+
+    // Find and process pre-rendered blocks
+    document.querySelectorAll("pre code.language-mermaid").forEach(element => {
+      const content = element.textContent;
+      const div = document.createElement("div");
+      div.className = "mermaid";
+      div.textContent = content;
+      element.parentNode.replaceWith(div);
     });
   });
 </script> 
