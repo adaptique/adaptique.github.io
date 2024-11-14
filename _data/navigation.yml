@@ -16,16 +16,3 @@ main:
     url: /blog/
   - title: "Community"
     url: /community/
-
-# Technology dropdown navigation
-tech:
-  - title: Technology
-    children:
-      - title: "DNA Structure"
-        url: /tech/dna-structure/
-      - title: "Helical Chains (strands)"
-        url: /tech/helical-chains/
-      - title: "Base Pairs (links)"
-        url: /tech/base-pairs/
-      - title: "Security Model"
-        url: /tech/security/
