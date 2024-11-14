@@ -21,7 +21,7 @@ We're a community of:
 
 ### 💬 Discord
 Join our Discord server for real-time discussions, technical help, and community events.
-[Join Discord](#) <!-- Add your Discord invite link -->
+[Join Discord](https://discord.gg/8jUsUCr6eN)
 
 ### 🐦 Twitter
 Follow us [@Adaptique](#) for the latest updates and community highlights.
