@@ -4,6 +4,7 @@ main:
   - title: "Architecture"
     url: /architecture/
   - title: "Technology"
+    url: /tech/
     children:
       - title: "DNA Structure"
         url: /tech/dna-structure/
