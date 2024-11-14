@@ -35,3 +35,4 @@ markdown: kramdown
 kramdown:
   syntax_highlighter_opts:
     disable: true
+  parse_block_html: true
