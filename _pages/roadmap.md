@@ -1,13 +1,8 @@
 ---
 title: "Development Roadmap"
 permalink: /roadmap/
-excerpt: "Detailed development roadmap for Adaptique, outlining phases from MVP to full feature implementation"
+layout: single
 toc: true
-toc_label: "Roadmap Contents"
-toc_icon: "road"
-toc_sticky: true
-sidebar:
-  nav: "docs"
 classes: wide
 ---
 
