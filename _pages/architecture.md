@@ -142,102 +142,37 @@ stateDiagram-v2
 ```yaml
 chain:
   name: string
-  type: "defi" | "gaming" | "nft" | "governance"
+  type: string      # Allows for custom chain types
   consensus:
-    mechanism: "pos" | "poa" | "hybrid"
+    mechanism: string
     validators: number
   performance:
     block_time: number
     max_transactions: number
-    auto_scaling:
-      enabled: boolean
-      min_shards: number
-      max_shards: number
-      scaling_threshold: number
-      cooldown_period: number
-  features:
-    - smart_contracts
-    - zero_knowledge_proofs
-    - custom_tokens
-  sharding:
-    enabled: boolean
-    strategy: "geographic" | "transaction_type" | "custom"
-    cross_shard_protocol: "atomic" | "eventual"
-    data_availability: "full" | "partial"
-    replication_factor: number
-  tokenomics:
-    native_token:
-      name: string
-      symbol: string
-      initial_supply: number
-      max_supply: number | "unlimited"
-      decimal_places: number
-    emission:
-      type: "fixed" | "inflationary" | "deflationary"
-      rate: number  # annual rate for inflation/deflation
-      distribution:
-        validator_rewards: number  # percentage
-        developer_fund: number     # percentage
-        ecosystem_growth: number   # percentage
-        treasury: number           # percentage
-    staking:
-      minimum_stake: number
-      lockup_period: number        # in blocks or time
-      slashing_conditions:
-        - condition: string
-          penalty: number          # percentage
-    fees:
-      model: "fixed" | "dynamic" | "hybrid"
-      base_fee: number
-      fee_distribution:
-        validators: number         # percentage
-        burn: number              # percentage
-        treasury: number          # percentage
-    governance:
-      voting_power: "token_based" | "stake_based" | "hybrid"
-      proposal_threshold: number   # minimum tokens to propose
-      quorum: number              # percentage required for valid vote
-      legal_structure:
-        type: "DAO" | "LAO" | "LLC" | "Foundation"
-        jurisdiction: string
-        compliance:
-          kyc_required: boolean
-          accredited_investors_only: boolean
-          max_members: number | "unlimited"
-          transfer_restrictions: boolean
-      organizational_structure:
-        type: "flat" | "hierarchical" | "holacratic"
-        roles:
-          - name: "manager"
-            permissions: ["propose", "vote", "execute"]
-            requirements:
-              token_threshold: number
-              kyc_level: number
-          - name: "member"
-            permissions: ["vote"]
-            requirements:
-              token_threshold: number
-      operating_agreement:
-        version: string
-        ipfs_hash: string      # Link to legal documents
-        amendments:
-          voting_period: number
-          super_majority: number
-          legal_review_required: boolean
-      profit_distribution:
-        mechanism: "automatic" | "proposal_based"
-        schedule: "monthly" | "quarterly" | "annual"
-        allocation:
-          members: number      # percentage
-          treasury: number     # percentage
-          reinvestment: number # percentage
-      regulatory_compliance:
-        reporting:
-          frequency: "monthly" | "quarterly" | "annual"
-          requirements: ["financial", "membership", "activities"]
-        restrictions:
-          geographical: ["US", "EU", "APAC"]
-          participant_type: ["retail", "accredited", "institutional"]
+    auto_scaling: boolean
+  features: string[] # Extensible feature set
+  execution_environment:
+    engine: "wasm"  # or other supported engines
+    runtime_version: string
+    memory_limit: number
+    compute_limit: number
+    allowed_imports: string[]
+    storage_access: "full" | "restricted"
+  access_control:
+    mode: "permissioned" | "permissionless" | "hybrid"
+    providers:
+      - name: string           # e.g., "okta", "on-chain", "custom"
+        type: string           # provider type
+        priority: number       # for multiple providers
+        config:
+          endpoint: string     # Optional: external provider endpoint
+          contract: string     # Optional: on-chain contract address
+          wasm_validator: string  # Optional: WASM module for custom validation
+          params: map[string]string
+    validation:
+      strategy: "any" | "all" | "weighted"
+      timeout: number
+      fallback: "deny" | "allow"
 ```
 
 #### Base Pair Protocol Messages
@@ -246,85 +181,37 @@ message CrossChainTransaction {
   string source_chain_id = 1;
   string target_chain_id = 2;
   bytes transaction_id = 3;
-  uint64 timestamp = 4;
   
-  oneof payload {
-    AssetTransfer asset_transfer = 10;
-    IdentityVerification identity = 11;
-    GovernanceAction governance = 12;
-    OrganizationAction organization = 13;
-    ContractInteraction contract = 14;
-  }
-
-  message AssetTransfer {
-    bytes asset_id = 1;
-    bytes from_address = 2;
-    bytes to_address = 3;
-    bytes amount = 4;
-    map<string, bytes> metadata = 5;
-  }
-
-  message IdentityVerification {
-    bytes identity_id = 1;
+  // Generic payload that can be interpreted by receiving chain
+  bytes payload = 4;
+  string payload_type = 5;
+  
+  // Verification
+  bytes proof = 6;
+  map<string, bytes> metadata = 7;
+  
+  // WASM-specific fields
+  optional bytes wasm_code = 8;     // For deployments
+  optional bytes wasm_input = 9;    // For executions
+  
+  // Access control
+  message AccessProof {
+    string provider_id = 1;
     bytes proof = 2;
-    repeated string claims = 3;
-    uint64 expiration = 4;
+    map<string, bytes> metadata = 3;
   }
-
-  message GovernanceAction {
-    bytes proposal_id = 1;
-    ActionType action_type = 2;
-    bytes parameters = 3;
-    repeated bytes signatures = 4;
-    
-    enum ActionType {
-      VOTE = 0;
-      EXECUTE = 1;
-      VETO = 2;
-      DELEGATE = 3;
-    }
-  }
-
-  message OrganizationAction {
-    bytes org_id = 1;
-    ActionType action_type = 2;
-    bytes parameters = 3;
-    repeated bytes authorizations = 4;
-    
-    enum ActionType {
-      MEMBER_UPDATE = 0;
-      STRUCTURE_UPDATE = 1;
-      COMPLIANCE_UPDATE = 2;
-      PROFIT_DISTRIBUTION = 3;
-      CROSS_CHAIN_OPERATION = 4;
-    }
-  }
-
-  message ContractInteraction {
-    bytes contract_address = 1;
-    bytes method_id = 2;
-    bytes parameters = 3;
-    bytes callback_data = 4;
-  }
-
-  // Verification and routing
-  bytes proof = 20;
-  uint32 sequence_number = 21;
-  repeated string route = 22;
-  map<string, bytes> metadata = 23;
+  repeated AccessProof access_proofs = 4;
 }
 
 message CrossChainResponse {
   bytes transaction_id = 1;
   Status status = 2;
   bytes result = 3;
-  string error_message = 4;
   
   enum Status {
     SUCCESS = 0;
     FAILURE = 1;
     PENDING = 2;
-    ROLLBACK = 3;
   }
 }
 ```

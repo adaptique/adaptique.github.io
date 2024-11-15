@@ -6,12 +6,8 @@ main:
     url: /architecture/
   - title: "Technology"
     url: /tech/
-  - title: "Documentation"
-    url: /docs/
-  - title: "Use Cases"
-    url: /use-cases/
-  - title: "Developer Hub"
-    url: /developers/
+  - title: "Roadmap"
+    url: /roadmap/
   - title: "Blog"
     url: /blog/
   - title: "Community"
