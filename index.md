@@ -9,17 +9,27 @@ header:
     - label: "<i class='fas fa-download'></i> Explore our roadmap"
       url: "/roadmap/"
 excerpt: >
-  A modular blockchain infrastructure supporting WASM smart contracts and flexible access control.<br />
-  <small>Current Version: 0.1.0-alpha</small>
+  A biomimetic blockchain that adapts like living organisms through its unique Strands and Bridges architecture. 
+  Featuring dynamic chain evolution, natural selection of features, and symbiotic cross-chain relationships.<br />
+  <small>Nature-inspired. Evolution-driven. Future-ready.</small>
 ---
 
 ## Key Features
 
-- **Modular Chain Configuration**: Customize chain parameters and features
-- **WASM Smart Contracts**: Write contracts in multiple languages
-- **Flexible Access Control**: Pluggable authentication providers
-- **Cross-Chain Communication**: Secure Base Pair Protocol
-- **Enterprise Ready**: Support for permissioned and permissionless modes
+- **Adaptive Strand Architecture**: Independent blockchains with customizable consensus and validation
+- **Secure Bridge Protocol**: Cross-strand communication with flexible transaction routing
+- **Modular Chain Configuration**: Customize chain parameters and features per strand
+- **Dynamic Evolution**: Add and modify strands at runtime to adapt to changing needs
+- **Enterprise Ready**: Support for both permissioned and permissionless modes
+
+## Architecture Overview
+
+```mermaid
+graph TD
+    S1[Strand A] <--> B1[Bridge] <--> S2[Strand B]
+    S2 <--> B2[Bridge] <--> S3[Strand C]
+    B1 <--> S4[Strand D]
+```
 
 ## Getting Started
 
